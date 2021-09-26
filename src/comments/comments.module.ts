@@ -8,11 +8,8 @@ import { ArticlesModule } from 'src/articles/articles.module';
 import { CommentsRepository } from './comments.repository';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Comment]),
-    ArticlesModule
-  ],
+  imports: [TypeOrmModule.forFeature([Comment]), ArticlesModule],
   controllers: [CommentsController],
-  providers: [CommentsService, CommentsRepository, ArticleExistsRule]
+  providers: [CommentsService, CommentsRepository, ArticleExistsRule],
 })
 export class CommentsModule {}

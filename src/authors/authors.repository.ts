@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 import { CreateAuthorDto } from './dto/create-author.dto';
 import { Author } from './entities/author.entity';
 
@@ -8,8 +12,8 @@ import { Author } from './entities/author.entity';
 export class AuthorsRepository {
   constructor(
     @InjectRepository(Author)
-    private authorRepository
-  ) { }
+    private authorRepository,
+  ) {}
 
   create(createAuthorDto: CreateAuthorDto) {
     const author = this.authorRepository.create(createAuthorDto);

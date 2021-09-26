@@ -6,9 +6,7 @@ import { Author } from './entities/author.entity';
 
 @Injectable()
 export class AuthorsService {
-  constructor(
-    private authorsRepository: AuthorsRepository
-  ) { }
+  constructor(private authorsRepository: AuthorsRepository) {}
 
   create(createAuthorDto: CreateAuthorDto) {
     return this.authorsRepository.create(createAuthorDto);

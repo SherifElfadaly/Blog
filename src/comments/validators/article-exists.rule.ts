@@ -1,6 +1,10 @@
-import { Injectable } from "@nestjs/common";
-import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from "class-validator";
-import { ArticlesRepository } from "src/articles/articles.repository";
+import { Injectable } from '@nestjs/common';
+import {
+  ValidationArguments,
+  ValidatorConstraint,
+  ValidatorConstraintInterface,
+} from 'class-validator';
+import { ArticlesRepository } from 'src/articles/articles.repository';
 
 @ValidatorConstraint({ name: 'ArticleExists', async: true })
 @Injectable()

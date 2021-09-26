@@ -7,9 +7,7 @@ import { Article } from './entities/article.entity';
 
 @Injectable()
 export class ArticlesService {
-  constructor(
-    private articlesRepository: ArticlesRepository
-  ) { }
+  constructor(private articlesRepository: ArticlesRepository) {}
 
   create(createArticleDto: CreateArticleDto) {
     return this.articlesRepository.create(createArticleDto);
@@ -19,9 +17,14 @@ export class ArticlesService {
     options: IPaginationOptions,
     conditions?: SearchArticleDto,
     sortBy?: string,
-    sortDirection?: string
+    sortDirection?: string,
   ): Promise<Pagination<Article>> {
-    return this.articlesRepository.findAll(options, conditions, sortBy, sortDirection);
+    return this.articlesRepository.findAll(
+      options,
+      conditions,
+      sortBy,
+      sortDirection,
+    );
   }
 
   findOne(id: number): Promise<Article | undefined> {
@@ -32,8 +35,10 @@ export class ArticlesService {
     const article = await this.findOne(id);
 
     // TODO: prevent user from thumbs_up multiple times
-    
-    await this.articlesRepository.update(id, {thumbs_up: ++article.thumbs_up})
+
+    await this.articlesRepository.update(id, {
+      thumbs_up: ++article.thumbs_up,
+    });
 
     return article;
   }

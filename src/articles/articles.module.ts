@@ -8,12 +8,9 @@ import { AuthorExistsRule } from './validators/author-exists.rule';
 import { AuthorsModule } from 'src/authors/authors.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Article]),
-    AuthorsModule
-  ],
+  imports: [TypeOrmModule.forFeature([Article]), AuthorsModule],
   controllers: [ArticlesController],
   providers: [ArticlesService, ArticlesRepository, AuthorExistsRule],
-  exports: [ArticlesService, ArticlesRepository]
+  exports: [ArticlesService, ArticlesRepository],
 })
 export class ArticlesModule {}

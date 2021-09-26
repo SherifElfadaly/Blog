@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
-import { Like } from 'typeorm';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { Comment } from './entities/comment.entity';
 
@@ -9,8 +12,8 @@ import { Comment } from './entities/comment.entity';
 export class CommentsRepository {
   constructor(
     @InjectRepository(Comment)
-    private commentRepository
-  ) { }
+    private commentRepository,
+  ) {}
 
   create(createCommentDto: CreateCommentDto) {
     const comment = this.commentRepository.create(createCommentDto);

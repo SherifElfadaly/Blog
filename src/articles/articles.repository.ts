@@ -1,6 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginate';
+import {
+  IPaginationOptions,
+  paginate,
+  Pagination,
+} from 'nestjs-typeorm-paginate';
 import { Like } from 'typeorm';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { SearchArticleDto } from './dto/search-article.dto';
@@ -11,8 +15,8 @@ import { Article } from './entities/article.entity';
 export class ArticlesRepository {
   constructor(
     @InjectRepository(Article)
-    private articleRepository
-  ) { }
+    private articleRepository,
+  ) {}
 
   create(createArticleDto: CreateArticleDto) {
     const article = this.articleRepository.create(createArticleDto);
@@ -27,17 +31,17 @@ export class ArticlesRepository {
     options: IPaginationOptions,
     conditions?: SearchArticleDto,
     sortBy?: string,
-    sortDirection?: string
+    sortDirection?: string,
   ): Promise<Pagination<Article>> {
     /**
      * TODO: Implment more generic way for filtring and sorting
-     * for example use builder pattern to build 
+     * for example use builder pattern to build
      * the conditions and sorting array.
      */
     const where = this.constructWhereConditionsArray(conditions);
     const sort = this.constructSortArray(sortBy, sortDirection);
     const searchOptions = { where: where, order: sort };
-    
+
     return paginate<Article>(this.articleRepository, options, searchOptions);
   }
 
@@ -49,7 +53,7 @@ export class ArticlesRepository {
     return this.articleRepository.findOneOrFail(id);
   }
 
-  private constructSortArray(sortBy: string, sortDirection: string = 'ASC') {
+  private constructSortArray(sortBy: string, sortDirection = 'ASC') {
     const sort = {};
     switch (sortBy) {
       case 'thumbs_up':

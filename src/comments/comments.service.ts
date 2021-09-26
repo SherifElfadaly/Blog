@@ -6,9 +6,7 @@ import { Comment } from './entities/comment.entity';
 
 @Injectable()
 export class CommentsService {
-  constructor(
-    private commentsRepository: CommentsRepository
-  ) { }
+  constructor(private commentsRepository: CommentsRepository) {}
 
   create(createCommentDto: CreateCommentDto) {
     return this.commentsRepository.create(createCommentDto);
