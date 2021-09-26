@@ -1,0 +1,29 @@
+version: '3.2'
+
+services:
+    blog_mysql:
+      container_name: 'blog_mysql'
+      image: mysql:5.7
+      volumes:
+        - ./run/var:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+        - MYSQL_DATABASE=${DB_DATABASE}
+        - MYSQL_USER=${DB_USERNAME}
+        - MYSQL_PASSWORD=${DB_PASSWORD}
+      ports:
+        - "${MYSQL_EXTERNAL_PORT}:${DB_PORT}"
+      restart: always
+      
+    blog_app:
+      container_name: 'blog'
+      build: .
+      links:
+        - "blog_mysql"
+        - "blog_redis"
+      depends_on:
+        - "blog_mysql"
+        - "blog_redis"
+      ports:
+        - "${APP_EXTERNAL_PORT}:${APP_PORT}"
+      restart: always
