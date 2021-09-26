@@ -18,11 +18,23 @@ export class ArticlesService {
   findAll(
     options: IPaginationOptions,
     conditions?: SearchArticleDto,
+    sortBy?: string,
+    sortDirection?: string
   ): Promise<Pagination<Article>> {
-    return this.articlesRepository.findAll(options, conditions);
+    return this.articlesRepository.findAll(options, conditions, sortBy, sortDirection);
   }
 
   findOne(id: number): Promise<Article | undefined> {
     return this.articlesRepository.findOne(id);
+  }
+
+  async thumbsUp(id: number) {
+    const article = await this.findOne(id);
+
+    // TODO: prevent user from thumbs_up multiple times
+    
+    await this.articlesRepository.update(id, {thumbs_up: ++article.thumbs_up})
+
+    return article;
   }
 }

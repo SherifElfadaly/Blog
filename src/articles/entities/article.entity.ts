@@ -21,6 +21,9 @@ export class Article {
 
   @Column()
   body: string;
+  
+  @Column()
+  thumbs_up:number;
 
   @Column()
   author_id: number;

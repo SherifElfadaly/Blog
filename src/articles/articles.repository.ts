@@ -4,6 +4,7 @@ import { IPaginationOptions, paginate, Pagination } from 'nestjs-typeorm-paginat
 import { Like } from 'typeorm';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { SearchArticleDto } from './dto/search-article.dto';
+import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
 
 @Injectable()
@@ -18,14 +19,26 @@ export class ArticlesRepository {
     return this.articleRepository.save(article);
   }
 
+  update(id: number, updateArticleDto: UpdateArticleDto) {
+    return this.articleRepository.update(id, updateArticleDto);
+  }
+
   findAll(
     options: IPaginationOptions,
     conditions?: SearchArticleDto,
+    sortBy?: string,
+    sortDirection?: string
   ): Promise<Pagination<Article>> {
+    /**
+     * TODO: Implment more generic way for filtring and sorting
+     * for example use builder pattern to build 
+     * the conditions and sorting array.
+     */
     const where = this.constructWhereConditionsArray(conditions);
-    return paginate<Article>(this.articleRepository, options, {
-      where: where,
-    });
+    const sort = this.constructSortArray(sortBy, sortDirection);
+    const searchOptions = { where: where, order: sort };
+    
+    return paginate<Article>(this.articleRepository, options, searchOptions);
   }
 
   findOne(id: number): Promise<Article | undefined> {
@@ -34,6 +47,20 @@ export class ArticlesRepository {
 
   findOrFail(id: number): Promise<Article | undefined> {
     return this.articleRepository.findOneOrFail(id);
+  }
+
+  private constructSortArray(sortBy: string, sortDirection: string = 'ASC') {
+    const sort = {};
+    switch (sortBy) {
+      case 'thumbs_up':
+        sort['thumbs_up'] = sortDirection;
+        break;
+
+      default:
+        break;
+    }
+
+    return sort;
   }
 
   private constructWhereConditionsArray(conditions: SearchArticleDto) {

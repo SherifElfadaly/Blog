@@ -22,16 +22,25 @@ export class ArticlesController {
   @Get()
   @ApiQuery({ name: 'page', type: String, required: false })
   @ApiQuery({ name: 'limit', type: String, required: false })
+  @ApiQuery({ name: 'sortBy', description: 'Name of the column to use in sort ex: thumbs_up', type: String, required: false })
+  @ApiQuery({ name: 'sortDirection', description: 'Sort ascending or descending ex: ASC or DESC', type: String, required: false })
   findAll(
     @Query() query: SearchArticleDto,
+    @Query('sortBy') sortBy: string,
+    @Query('sortDirection') sortDirection: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
   ): Promise<Pagination<Article>> {
-    return this.articlesService.findAll({ page, limit }, query);
+    return this.articlesService.findAll({ page, limit }, query, sortBy, sortDirection);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.articlesService.findOne(+id);
+  }
+
+  @Get('thumbs/up/:id')
+  thumbsUp(@Param('id') id: string) {
+    return this.articlesService.thumbsUp(+id);
   }
 }
