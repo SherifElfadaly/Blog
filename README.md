@@ -25,3 +25,15 @@ Run the following command:
 ``` bash
 docker exec blog npm run seed:run
 ```
+
+## Unit testing
+
+Running the test
+``` bash
+docker exec blog npm run test
+```
+
+Test coverage
+``` bash
+docker exec blog npm run test:cov
+```
