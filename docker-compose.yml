@@ -20,10 +20,8 @@ services:
       build: .
       links:
         - "blog_mysql"
-        - "blog_redis"
       depends_on:
         - "blog_mysql"
-        - "blog_redis"
       ports:
         - "${APP_EXTERNAL_PORT}:${APP_PORT}"
       restart: always

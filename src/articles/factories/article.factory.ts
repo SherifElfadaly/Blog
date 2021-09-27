@@ -7,7 +7,7 @@ define(Article, (faker: typeof Faker) => {
   const article = new Article();
   article.title = faker.lorem.word();
   article.body = faker.lorem.paragraph();
-  article.thumbs_up = faker.datatype.number();
+  article.thumbs_up = faker.random.number();
   article.author = factory(Author)() as any;
 
   return article;
