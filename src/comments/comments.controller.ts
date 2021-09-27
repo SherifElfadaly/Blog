@@ -23,7 +23,7 @@ export class CommentsController {
   @ApiBody({
     type: CreateCommentDto,
   })
-  create(@Body() createCommentDto: CreateCommentDto) {
+  create(@Body() createCommentDto: CreateCommentDto): Promise<Comment> {
     return this.commentsService.create(createCommentDto);
   }
 
@@ -38,7 +38,7 @@ export class CommentsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<Comment> {
     return this.commentsService.findOne(+id);
   }
 }

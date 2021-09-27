@@ -4,7 +4,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { AuthorsRepository } from 'src/authors/authors.repository';
+import { AuthorsRepository } from '../../authors/authors.repository';
 
 @ValidatorConstraint({ name: 'AuthorExists', async: true })
 @Injectable()

@@ -44,9 +44,9 @@ export class ArticlesController {
     required: false,
   })
   findAll(
-    @Query() query: SearchArticleDto,
-    @Query('sortBy') sortBy: string,
-    @Query('sortDirection') sortDirection: string,
+    @Query() query?: SearchArticleDto,
+    @Query('sortBy') sortBy?: string,
+    @Query('sortDirection') sortDirection?: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
   ): Promise<Pagination<Article>> {

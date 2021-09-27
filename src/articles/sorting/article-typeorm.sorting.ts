@@ -1,4 +1,4 @@
-import { BaseSorting } from 'src/sorting/base.sorting';
+import { BaseSorting } from '../../sorting/base.sorting';
 
 export class ArticleTypeOrmSorting
   extends BaseSorting

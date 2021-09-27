@@ -4,7 +4,7 @@ import { CommentsController } from './comments.controller';
 import { Comment } from './entities/comment.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ArticleExistsRule } from './validators/article-exists.rule';
-import { ArticlesModule } from 'src/articles/articles.module';
+import { ArticlesModule } from '../articles/articles.module';
 import { CommentsRepository } from './comments.repository';
 
 @Module({

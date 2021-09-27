@@ -4,7 +4,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import { ArticlesRepository } from 'src/articles/articles.repository';
+import { ArticlesRepository } from '../../articles/articles.repository';
 
 @ValidatorConstraint({ name: 'ArticleExists', async: true })
 @Injectable()

@@ -8,7 +8,7 @@ import { Comment } from './entities/comment.entity';
 export class CommentsService {
   constructor(private commentsRepository: CommentsRepository) {}
 
-  create(createCommentDto: CreateCommentDto) {
+  create(createCommentDto: CreateCommentDto): Promise<Comment> {
     return this.commentsRepository.create(createCommentDto);
   }
 

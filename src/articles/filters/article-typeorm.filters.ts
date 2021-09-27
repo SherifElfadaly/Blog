@@ -1,4 +1,4 @@
-import { BaseFilters } from 'src/filters/base.filters';
+import { BaseFilters } from '../../filters/base.filters';
 import { Like } from 'typeorm';
 
 export class ArticleTypeOrmFilters

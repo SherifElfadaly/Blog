@@ -1,7 +1,7 @@
 import { define, factory } from 'typeorm-seeding';
 import Faker from 'faker';
 import { Article } from '../entities/article.entity';
-import { Author } from 'src/authors/entities/author.entity';
+import { Author } from '../..//authors/entities/author.entity';
 
 define(Article, (faker: typeof Faker) => {
   const article = new Article();
